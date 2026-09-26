@@ -1,0 +1,127 @@
+{
+  "mumbai": [
+    {
+      "id": "SHELTER_MUM_01",
+      "name": "MMRDA Grounds High Ground Relief Center",
+      "type": "Primary Mega Shelter",
+      "lat": 19.0650,
+      "lng": 72.8640,
+      "capacity_people": 15000,
+      "current_occupancy": 320,
+      "elevation_m": 8.5,
+      "contact": "+91-22-26590000",
+      "amenities": ["Helipad", "Medical Post", "Drinking Water Tankers", "Power Generators", "NDRF Boat Staging"],
+      "status": "OPERATIONAL"
+    },
+    {
+      "id": "SHELTER_MUM_02",
+      "name": "Lokmanya Tilak Municipal Medical College (Sion)",
+      "type": "Emergency Trauma Hospital",
+      "lat": 19.0380,
+      "lng": 72.8600,
+      "capacity_people": 3500,
+      "current_occupancy": 890,
+      "elevation_m": 5.8,
+      "contact": "+91-22-24076381",
+      "amenities": ["ICU", "Blood Bank", "Emergency Surgeries", "Ambulance Hub"],
+      "status": "HIGH_ALERT"
+    },
+    {
+      "id": "SHELTER_MUM_03",
+      "name": "Andheri Sports Complex Relief Haven",
+      "type": "Community Evacuation Shelter",
+      "lat": 19.1332,
+      "lng": 72.8335,
+      "capacity_people": 6000,
+      "current_occupancy": 150,
+      "elevation_m": 9.2,
+      "contact": "+91-22-26744000",
+      "amenities": ["Dry Rations", "Beds", "Sanitation Blocks", "Emergency Comms"],
+      "status": "OPERATIONAL"
+    }
+  ],
+  "chennai": [
+    {
+      "id": "SHELTER_CHE_01",
+      "name": "Anna University Indoor Stadium Safe Haven",
+      "type": "Primary Elevated Shelter",
+      "lat": 13.0110,
+      "lng": 80.2354,
+      "capacity_people": 8000,
+      "current_occupancy": 210,
+      "elevation_m": 14.2,
+      "contact": "+91-44-22357000",
+      "amenities": ["High Ground", "Solar Backup", "Community Kitchen", "NDRF Staging Area"],
+      "status": "OPERATIONAL"
+    },
+    {
+      "id": "SHELTER_CHE_02",
+      "name": "Guindy Race Course Emergency Camp",
+      "type": "Open Ground Logistics Hub",
+      "lat": 13.0080,
+      "lng": 80.2150,
+      "capacity_people": 12000,
+      "current_occupancy": 400,
+      "elevation_m": 12.0,
+      "contact": "+91-44-22351234",
+      "amenities": ["Airdrop Dropzone", "Heavy Vehicle Access", "Field Hospital"],
+      "status": "OPERATIONAL"
+    }
+  ],
+  "bengaluru": [
+    {
+      "id": "SHELTER_BLR_01",
+      "name": "Koramangala Indoor Stadium Evacuation Hub",
+      "type": "Emergency Municipal Shelter",
+      "lat": 12.9350,
+      "lng": 77.6210,
+      "capacity_people": 7500,
+      "current_occupancy": 180,
+      "elevation_m": 890.0,
+      "contact": "+91-80-22221188",
+      "amenities": ["Command Room", "Medical Triage", "Food Relief Distribution", "Backup Power"],
+      "status": "OPERATIONAL"
+    },
+    {
+      "id": "SHELTER_BLR_02",
+      "name": "Command Hospital Air Force Ridge",
+      "type": "Specialized Medical Hub",
+      "lat": 12.9640,
+      "lng": 77.6430,
+      "capacity_people": 4000,
+      "current_occupancy": 650,
+      "elevation_m": 915.0,
+      "contact": "+91-80-25369000",
+      "amenities": ["Airlift Medevac", "ICU", "Disaster Response Unit"],
+      "status": "OPERATIONAL"
+    }
+  ],
+  "delhi": [
+    {
+      "id": "SHELTER_DEL_01",
+      "name": "National Stadium Disaster Camp (India Gate Ridge)",
+      "type": "High Ground Emergency Mega Center",
+      "lat": 28.6120,
+      "lng": 77.2370,
+      "capacity_people": 20000,
+      "current_occupancy": 520,
+      "elevation_m": 220.0,
+      "contact": "+91-11-23381122",
+      "amenities": ["NDRF 8th Battalion HQ", "Mobile Water Treatment Plant", "Mega Kitchen", "Satellite Comms"],
+      "status": "OPERATIONAL"
+    },
+    {
+      "id": "SHELTER_DEL_02",
+      "name": "LNJP Emergency Medical Base",
+      "type": "Central Disaster Hospital",
+      "lat": 28.6380,
+      "lng": 77.2410,
+      "capacity_people": 5000,
+      "current_occupancy": 1100,
+      "elevation_m": 215.0,
+      "contact": "+91-11-23233000",
+      "amenities": ["Trauma ICU", "Mass Casualty Ward", "Blood Depot"],
+      "status": "HIGH_ALERT"
+    }
+  ]
+}

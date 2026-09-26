@@ -1,0 +1,5 @@
+# Auto-detect text files and normalize line endings
+* text=auto
+
+# Keep node_modules and external libraries as-is
+node_modules/** -text
