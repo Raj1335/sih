@@ -6,8 +6,8 @@ class Settings(BaseModel):
     APP_VERSION: str = "1.0.0"
     API_PREFIX: str = "/api/v1"
     HOST: str = "0.0.0.0"
-    PORT: int = 8000
-    
+    PORT: int = int(os.environ.get("PORT", 8000))
+        
     # Meteorological Thresholds (IMD Standards mm/24h or mm/h rate equivalent)
     GREEN_THRESHOLD_MM: float = 15.0      # Light rainfall
     YELLOW_THRESHOLD_MM: float = 64.4     # Moderate to Heavy (Watch)
