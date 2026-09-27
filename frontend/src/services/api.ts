@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   WeatherTelemetry, NowcastPrediction, SimulationRequest,
   CityInundationResponse, EvacuationRouteRequest, EvacuationRouteResponse,
-  CitizenSOS, CrowdFloodReport, IoTSensor, CityProfile
+  CitizenSOS, CrowdFloodReport, IoTSensor, CityProfile, HistoricalEventSummary, HistoricalReplayResponse
 } from '../types';
 
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
@@ -75,5 +75,17 @@ export const submitFloodReport = async (rpt: CrowdFloodReport): Promise<any> => 
 
 export const listFloodReports = async (): Promise<CrowdFloodReport[]> => {
   const res = await api.get('/citizen/reports');
+  return res.data;
+};
+
+export const getHistoricalEvents = async (): Promise<HistoricalEventSummary[]> => {
+  const res = await api.get('/historical/events');
+  return res.data;
+};
+
+export const getHistoricalReplay = async (cityId: string, date: string): Promise<HistoricalReplayResponse> => {
+  const res = await api.get('/historical/replay', {
+    params: { city_id: cityId, date }
+  });
   return res.data;
 };

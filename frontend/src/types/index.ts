@@ -164,3 +164,28 @@ export interface CityProfile {
   drainage_system: string;
   wards: any[];
 }
+
+export interface HistoricalEventSummary {
+  city_id: string;
+  available_from: string;
+  available_to: string;
+  notable_high_rainfall_days: { date: string; total_rainfall_mm: number }[];
+}
+
+export interface HistoricalReplayPoint {
+  time: string;
+  actual_precip_mm: number;
+  actual_next_hour_mm: number;
+  predicted_next_hour_mm: number;
+  predicted_alert_level: 'GREEN' | 'YELLOW' | 'ORANGE' | 'RED';
+  cloudburst_probability_pct: number;
+}
+
+export interface HistoricalReplayResponse {
+  city_id: string;
+  date: string;
+  total_actual_rainfall_mm: number;
+  mean_absolute_error_mm: number | null;
+  hours_replayed: number;
+  points: HistoricalReplayPoint[];
+}

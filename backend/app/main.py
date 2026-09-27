@@ -15,6 +15,7 @@ from app.ml.routing_engine import routing_engine
 from app.services.weather_service import weather_service
 from app.services.simulation_service import simulation_service
 from app.services.notification_service import notification_service
+from app.services.historical_service import historical_replay_service
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -125,3 +126,38 @@ async def submit_flood_report(report: CrowdFloodReport):
 async def list_flood_reports():
     """Returns all crowdsourced flood reports."""
     return notification_service.get_all_reports()
+
+@app.get("/api/v1/historical/events")
+async def get_historical_events():
+    """
+    Lists cities with real historical weather data available for replay,
+    their date range, and the highest-rainfall days on record - so the
+    frontend can offer a genuine 'replay a real day' picker instead of
+    a fabricated disaster scenario.
+    """
+    events = historical_replay_service.get_available_events()
+    if not events:
+        raise HTTPException(
+            status_code=404,
+            detail="No historical data found. Run fetch_historical_weather.py and "
+                   "copy historical_data/ into backend/app/data/historical/ first."
+        )
+    return events
+
+
+@app.get("/api/v1/historical/replay")
+async def replay_historical_day(city_id: str, date: str):
+    """
+    Replays a real historical day (YYYY-MM-DD) hour by hour through the
+    live trained model, returning actual vs. predicted rainfall for each
+    hour plus the day's mean absolute error - a genuine accuracy check
+    against real data, not a scripted demo number.
+    """
+    result = historical_replay_service.replay_day(city_id, date)
+    if result is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No historical data found for city '{city_id}' on {date}. "
+                    "Check /api/v1/historical/events for available dates."
+        )
+    return result

@@ -7,6 +7,7 @@ import { EvacuationRouter } from './components/EvacuationRouter';
 import { CitizenSOSModal } from './components/CitizenSOSModal';
 import { AnalyticsPanel } from './components/AnalyticsPanel';
 import { ExecutiveSummary } from './components/ExecutiveSummary';
+import { HistoricalReplay } from './components/HistoricalReplay';
 
 import {
   getCities, getWeatherTelemetry, predictNowcast,
@@ -24,7 +25,7 @@ import {
 export const App: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState<string>('mumbai');
   const [cityProfiles, setCityProfiles] = useState<Record<string, CityProfile>>({});
-  const [activeTab, setActiveTab] = useState<'map' | 'evacuation' | 'analytics' | 'summary'>('map');
+  const [activeTab, setActiveTab] = useState<'map' | 'evacuation' | 'analytics' | 'replay'>('map');
 
   // Meteorological & Simulation states
   const [isLiveWeather, setIsLiveWeather] = useState<boolean>(false);
@@ -275,9 +276,9 @@ export const App: React.FC = () => {
           <AnalyticsPanel inundationData={inundationData} />
         )}
 
-        {/* TAB 4: SIH EXECUTIVE SUMMARY & PITCH GUIDE */}
-        {activeTab === 'summary' && (
-          <ExecutiveSummary />
+        {/* TAB 4: HISTORICAL REPLAY */}
+        {activeTab === 'replay' && (
+          <HistoricalReplay selectedCity={selectedCity} />
         )}
       </main>
 
