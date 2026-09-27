@@ -1,15 +1,17 @@
 import React from 'react';
-import { 
-  CloudRain, AlertTriangle, ShieldAlert, Navigation, 
-  BarChart3, FileText, Activity, Radio, Waves
+import {
+  CloudRain, ShieldAlert, Navigation,
+  BarChart3, History, Radio, Waves
 } from 'lucide-react';
+
+export type ActiveTab = 'map' | 'evacuation' | 'analytics' | 'replay';
 
 interface NavbarProps {
   selectedCity: string;
   onCityChange: (cityId: string) => void;
   alertLevel: 'GREEN' | 'YELLOW' | 'ORANGE' | 'RED';
-  activeTab: 'map' | 'evacuation' | 'analytics' | 'summary';
-  setActiveTab: (tab: 'map' | 'evacuation' | 'analytics' | 'summary') => void;
+  activeTab: ActiveTab;
+  setActiveTab: (tab: ActiveTab) => void;
   onOpenSimulator: () => void;
   onOpenSOS: () => void;
   isLiveWeather: boolean;
@@ -25,63 +27,68 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
   onOpenSimulator,
   onOpenSOS,
-  isLiveWeather,
-  onToggleLiveWeather,
   simulatedRainRate,
 }) => {
   const getAlertBadge = () => {
     switch (alertLevel) {
       case 'RED':
         return (
-          <span className="flex items-center gap-1.5 px-3 py-1 bg-red-950/80 border border-red-500 text-red-400 rounded-full text-xs font-bold animate-pulse">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-            IMD RED ALERT (CLOUDBURST RISK)
+          <span className="flex items-center gap-1.5 px-3 py-1 bg-alert-red-container/20 border border-alert-red/40 text-alert-red rounded text-[11px] font-mono font-bold uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-alert-red animate-pulse" />
+            RED ALERT — CLOUDBURST RISK
           </span>
         );
       case 'ORANGE':
         return (
-          <span className="flex items-center gap-1.5 px-3 py-1 bg-orange-950/80 border border-orange-500 text-orange-400 rounded-full text-xs font-bold">
-            <span className="w-2 h-2 rounded-full bg-orange-500" />
-            IMD ORANGE ALERT (VERY HEAVY)
+          <span className="flex items-center gap-1.5 px-3 py-1 bg-flood-secondary-container/20 border border-flood-secondary/40 text-flood-secondary rounded text-[11px] font-mono font-bold uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-flood-secondary" />
+            ORANGE ALERT — VERY HEAVY
           </span>
         );
       case 'YELLOW':
         return (
-          <span className="flex items-center gap-1.5 px-3 py-1 bg-yellow-950/80 border border-yellow-500 text-yellow-400 rounded-full text-xs font-semibold">
-            <span className="w-2 h-2 rounded-full bg-yellow-500" />
-            IMD YELLOW WATCH
+          <span className="flex items-center gap-1.5 px-3 py-1 bg-alert-amber/10 border border-alert-amber/40 text-alert-amber rounded text-[11px] font-mono font-semibold uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-alert-amber" />
+            YELLOW WATCH
           </span>
         );
       default:
         return (
-          <span className="flex items-center gap-1.5 px-3 py-1 bg-emerald-950/80 border border-emerald-500 text-emerald-400 rounded-full text-xs font-medium">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+          <span className="flex items-center gap-1.5 px-3 py-1 bg-alert-green/10 border border-alert-green/40 text-alert-green rounded text-[11px] font-mono font-medium uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-alert-green" />
             CONDITIONS NORMAL
           </span>
         );
     }
   };
 
+  const tabs: { id: ActiveTab; label: string; icon: React.ReactNode }[] = [
+    { id: 'map', label: 'GIS Flood Map', icon: <Radio className="w-3.5 h-3.5" /> },
+    { id: 'evacuation', label: 'Evac Routes', icon: <Navigation className="w-3.5 h-3.5" /> },
+    { id: 'analytics', label: 'Ward Analytics', icon: <BarChart3 className="w-3.5 h-3.5" /> },
+    { id: 'replay', label: 'Historical Replay', icon: <History className="w-3.5 h-3.5" /> },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 glass-panel border-b border-slate-800/80 px-4 lg:px-6 py-2.5">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+    <header className="sticky top-0 z-50 bg-surface-lowest/90 backdrop-blur-xl border-b border-surface-variant/60 px-4 lg:px-6 py-2.5">
+      <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
         {/* Left Branding */}
         <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/25">
-              <Waves className="w-5 h-5 text-white" />
+            <div className="w-9 h-9 rounded bg-gradient-to-tr from-flood-primary to-flood-secondary-container flex items-center justify-center shadow-[0_0_12px_rgba(249,115,22,0.35)]">
+              <Waves className="w-5 h-5 text-onsurface" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-lg font-extrabold tracking-tight bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
-                  JalPrahari AI
+                <span className="text-lg font-extrabold tracking-tight text-onsurface font-display">
+                  JAL-DRISHTI
                 </span>
-                <span className="px-1.5 py-0.5 text-[10px] font-mono bg-cyan-950 text-cyan-400 border border-cyan-700/50 rounded font-bold">
-                  SIH 2026
+                <span className="px-1.5 py-0.5 text-[10px] font-mono bg-surface-high text-flood-primary-light border border-surface-variant rounded font-bold uppercase">
+                  EOC · SIH 2026
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-medium">
-                Integrated Heavy Rainfall & Inundation Warning System
+              <p className="text-[10px] text-onsurface-variant font-medium uppercase tracking-wide">
+                Integrated Heavy Rainfall & Inundation Command
               </p>
             </div>
           </div>
@@ -93,12 +100,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Center: Navigation Tabs & City Selector */}
         <div className="flex items-center flex-wrap gap-2 w-full md:w-auto justify-center">
-          {/* City Selector */}
           <div className="relative">
             <select
               value={selectedCity}
               onChange={(e) => onCityChange(e.target.value)}
-              className="bg-slate-900/90 border border-slate-700 hover:border-cyan-500 text-slate-200 text-xs font-semibold rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-cyan-500 cursor-pointer transition"
+              className="bg-surface-container border border-surface-variant hover:border-flood-secondary text-onsurface text-xs font-semibold rounded px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-flood-primary cursor-pointer transition font-mono"
             >
               <option value="mumbai">Mumbai (Mithi Catchment)</option>
               <option value="chennai">Chennai (Adyar/Velachery)</option>
@@ -107,52 +113,21 @@ export const Navbar: React.FC<NavbarProps> = ({
             </select>
           </div>
 
-          {/* Navigation Mode Tabs */}
-          <nav className="flex items-center bg-slate-900/80 p-1 rounded-lg border border-slate-800 text-xs">
-            <button
-              onClick={() => setActiveTab('map')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md font-medium transition ${
-                activeTab === 'map'
-                  ? 'bg-cyan-500 text-slate-950 shadow-sm font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <Radio className="w-3.5 h-3.5" />
-              GIS Flood Map
-            </button>
-            <button
-              onClick={() => setActiveTab('evacuation')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md font-medium transition ${
-                activeTab === 'evacuation'
-                  ? 'bg-cyan-500 text-slate-950 shadow-sm font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <Navigation className="w-3.5 h-3.5" />
-              Evac Routes
-            </button>
-            <button
-              onClick={() => setActiveTab('analytics')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md font-medium transition ${
-                activeTab === 'analytics'
-                  ? 'bg-cyan-500 text-slate-950 shadow-sm font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <BarChart3 className="w-3.5 h-3.5" />
-              Ward Analytics
-            </button>
-            <button
-              onClick={() => setActiveTab('summary')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md font-medium transition ${
-                activeTab === 'summary'
-                  ? 'bg-cyan-500 text-slate-950 shadow-sm font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <FileText className="w-3.5 h-3.5" />
-              SIH Synopsis
-            </button>
+          <nav className="flex items-center bg-surface-container p-1 rounded border border-surface-variant/60 text-xs">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded font-medium transition font-mono uppercase text-[11px] tracking-wide ${
+                  activeTab === tab.id
+                    ? 'bg-surface-high text-flood-primary-light shadow-inner font-bold'
+                    : 'text-onsurface-variant hover:text-onsurface'
+                }`}
+              >
+                {tab.icon}
+                {tab.label}
+              </button>
+            ))}
           </nav>
         </div>
 
@@ -164,7 +139,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={onOpenSimulator}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 text-white text-xs font-bold rounded-lg shadow-md shadow-sky-900/30 transition transform active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-surface-high border border-surface-variant hover:border-flood-secondary text-flood-secondary text-xs font-bold rounded transition transform active:scale-95 font-mono uppercase tracking-wide"
             title="Inject Cloudburst and simulate real-time inundation"
           >
             <CloudRain className="w-3.5 h-3.5" />
@@ -173,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={onOpenSOS}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-bold rounded-lg shadow-md shadow-red-900/30 transition transform active:scale-95 animate-pulse"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-flood-primary hover:brightness-110 text-onsurface text-xs font-bold rounded shadow-[0_0_12px_rgba(249,115,22,0.35)] transition transform active:scale-95 font-mono uppercase tracking-wide"
             title="Emergency Citizen Distress SOS"
           >
             <ShieldAlert className="w-3.5 h-3.5" />

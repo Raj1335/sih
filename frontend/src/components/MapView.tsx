@@ -171,8 +171,8 @@ export const MapView: React.FC<MapViewProps> = ({
 
         {/* Dark CartoDB Basemap tiles */}
         <TileLayer
-          attribution='&copy; <a href="https://carto.com/">CartoDB</a> & OpenStreetMap contributors'
-          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
         {/* 1. WARD INUNDATION HYDROLOGICAL LAYERS */}

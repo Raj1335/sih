@@ -8,20 +8,39 @@ export default {
   theme: {
     extend: {
       colors: {
+        surface: {
+          lowest: '#060e20',
+          low: '#131b2e',
+          DEFAULT: '#0b1326',
+          high: '#222a3d',
+          highest: '#2d3449',
+          bright: '#31394d',
+          variant: '#2d3449',
+        },
+        onsurface: {
+          DEFAULT: '#dae2fd',
+          variant: '#e0c0b1',
+        },
         flood: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          500: '#0284c7',
-          700: '#0369a1',
-          900: '#0c4a6e',
+          primary: '#f97316',
+          'primary-light': '#ffb690',
+          'on-primary': '#552100',
+          secondary: '#ffb95f',
+          'secondary-container': '#ee9800',
+          tertiary: '#adc6ff',
+          'tertiary-container': '#6399ff',
         },
         alert: {
           green: '#10b981',
-          yellow: '#f59e0b',
+          amber: '#eab308',
           orange: '#f97316',
           red: '#ef4444',
+          'red-container': '#93000a',
         }
+      },
+      fontFamily: {
+        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
