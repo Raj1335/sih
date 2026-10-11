@@ -84,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   JAL-DRISHTI
                 </span>
                 <span className="px-1.5 py-0.5 text-[10px] font-mono bg-surface-high text-flood-primary-light border border-surface-variant rounded font-bold uppercase">
-                  EOC · SIH 2026
+                 
                 </span>
               </div>
               <p className="text-[10px] text-onsurface-variant font-medium uppercase tracking-wide">
